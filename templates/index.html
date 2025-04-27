@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bitcoin Tweet Sentiment Analyzer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(-45deg, #74ebd5, #acb6e5, #fddb92, #d1fdff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        .tweet-box {
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            width: 500px;
+            max-width: 90%;
+        }
+
+        .tweet-header {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1da1f2;
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            border: 1px solid #ccd6dd;
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 16px;
+            resize: none;
+            outline: none;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            background-color: #f5f8fa;
+        }
+
+        button {
+            background-color: #1da1f2;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            float: right;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0d8ddb;
+        }
+
+        .result {
+            margin-top: 60px;
+            font-size: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #14171a;
+        }
+
+        .positive {
+            color: #17bf63;
+        }
+
+        .negative {
+            color: #e0245e;
+        }
+    </style>
+</head>
+<body>
+    <div class="tweet-box">
+        <div class="tweet-header">What's happening?</div>
+        <form method="POST">
+            <textarea name="text_input" placeholder="Compose your tweet..."></textarea>
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result {% if prediction == 'Positive' %}positive{% else %}negative{% endif %}">
+                Sentiment: {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
